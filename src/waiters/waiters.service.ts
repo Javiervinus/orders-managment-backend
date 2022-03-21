@@ -20,7 +20,7 @@ export class WaitersService {
     if (mailExist) {
       throw new BadRequestException('Ya existe un usuario con este correo');
     }
-    return this.waiterModel.create(createWaiterDto, {
+    return this.waiterModel.create(createWaiterDto as any, {
       include: ['user']
     });
   }
