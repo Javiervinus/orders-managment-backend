@@ -2,11 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { WaitersService } from './waiters.service';
 import { CreateWaiterDto } from './dto/create-waiter.dto';
 import { UpdateWaiterDto } from './dto/update-waiter.dto';
+import { Public } from 'src/core/decorators/public.decorator';
 
 @Controller('waiters')
 export class WaitersController {
-  constructor(private readonly waitersService: WaitersService) {}
+  constructor(private readonly waitersService: WaitersService) { }
 
+  @Public()
   @Post()
   create(@Body() createWaiterDto: CreateWaiterDto) {
     return this.waitersService.create(createWaiterDto);

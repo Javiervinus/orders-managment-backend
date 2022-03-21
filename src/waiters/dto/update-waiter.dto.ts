@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateWaiterDto } from './create-waiter.dto';
+import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
-export class UpdateWaiterDto extends PartialType(CreateWaiterDto) {}
+export class UpdateWaiterDto {
+    @ValidateNested()
+    @Type(() => UpdateUserDto)
+    user: UpdateUserDto;
+}
