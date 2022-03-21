@@ -1,4 +1,4 @@
-import { BeforeCreate, BeforeUpdate, Column, DataType, Model, Table } from "sequelize-typescript";
+import { BeforeCreate, BeforeUpdate, Column, DataType, Default, Model, Table } from "sequelize-typescript";
 import { hash } from 'bcrypt';
 import { Roles } from "src/core/constants";
 
@@ -10,6 +10,9 @@ export default class User extends Model {
     lastName: string;
     @Column
     email: string;
+    @Default(false)
+    @Column
+    isAdmin: boolean;
     @Column
     password: string;
     @Column(DataType.ENUM(Roles.CHEF, Roles.WAITER))

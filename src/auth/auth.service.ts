@@ -2,17 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { async } from 'rxjs';
 import { Roles } from 'src/core/constants';
+import { WaitersService } from 'src/waiters/waiters.service';
 
 @Injectable()
 export class AuthService {
-    constructor(private jwtService: JwtService) { }
+    constructor(private jwtService: JwtService, private waiterService: WaitersService) { }
     async validateUser(username: string, pass: string, rol: string): Promise<any> {
         switch (rol) {
             case Roles.CHEF:
 
                 break;
             case Roles.WAITER:
-
+                return this.waiterService.login(username, pass);
                 break;
 
             default:
@@ -22,7 +23,7 @@ export class AuthService {
     async login(user: any) {
         return {
             ...user,
-            token: this.jwtService.sign(user),
+            access_token: this.jwtService.sign(user),
         };
     }
 }

@@ -4,7 +4,7 @@ import { CreateWaiterDto } from './dto/create-waiter.dto';
 import { UpdateWaiterDto } from './dto/update-waiter.dto';
 import { Public } from 'src/core/decorators/public.decorator';
 
-@Controller('waiters')
+@Controller()
 export class WaitersController {
   constructor(private readonly waitersService: WaitersService) { }
 
