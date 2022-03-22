@@ -24,7 +24,7 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       models: [__dirname + '/**/*.entity{.ts,.js}'],
-      // autoLoadModels: true,
+      //autoLoadModels: true,
       //sync: { alter: true },
     };
     return config;

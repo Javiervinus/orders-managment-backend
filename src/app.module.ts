@@ -6,9 +6,43 @@ import { UsersModule } from './users/users.module';
 import { ChefsModule } from './chefs/chefs.module';
 import { WaitersModule } from './waiters/waiters.module';
 import { RestaurantsModule } from './restaurants/restaurants.module';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { SequelizeConfigService } from './sequelizeconfig.service';
+import { RouterModule } from '@nestjs/core';
+import { Roles } from './core/constants';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UsersModule, ChefsModule, WaitersModule, RestaurantsModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // no need to import into other modules
+    }),
+    AuthModule,
+    UsersModule,
+    ChefsModule,
+    WaitersModule,
+    RestaurantsModule,
+    SequelizeModule.forRootAsync({ useClass: SequelizeConfigService }),
+    RouterModule.register([
+      {
+        path: "api/v1",
+        children: [
+          {
+            path: Roles.CHEF,
+            module: ChefsModule
+          },
+          {
+            path: Roles.WAITER,
+            module: WaitersModule
+          },
+          {
+            path: "auth",
+            module: AuthModule
+          }
+        ]
+      }
+    ])
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
