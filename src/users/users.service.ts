@@ -12,7 +12,8 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+
+    return this.userModel.findAll({ attributes: { exclude: ["password"] } });
   }
 
   findOne(id: number) {

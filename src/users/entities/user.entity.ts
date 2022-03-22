@@ -1,6 +1,7 @@
-import { BeforeCreate, BeforeUpdate, Column, DataType, Default, Model, Table } from "sequelize-typescript";
+import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, Model, Table } from "sequelize-typescript";
 import { hash } from 'bcrypt';
 import { Roles } from "src/core/constants";
+import { Exclude } from "class-transformer";
 
 @Table({ timestamps: true })
 export default class User extends Model {
@@ -24,4 +25,6 @@ export default class User extends Model {
             user.password = await hash(user.password, 10);
         }
     }
+
+
 }

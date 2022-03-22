@@ -11,6 +11,7 @@ import { SequelizeConfigService } from './sequelizeconfig.service';
 import { RouterModule } from '@nestjs/core';
 import { Roles } from './core/constants';
 import { ConfigModule } from '@nestjs/config';
+import { BranchModule } from './branch/branch.module';
 
 @Module({
   imports: [
@@ -38,10 +39,15 @@ import { ConfigModule } from '@nestjs/config';
           {
             path: "auth",
             module: AuthModule
+          },
+          {
+            path: "users",
+            module: UsersModule
           }
         ]
       }
-    ])
+    ]),
+    BranchModule
   ],
   controllers: [AppController],
   providers: [AppService],
