@@ -1,4 +1,10 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateChefDto } from './create-chef.dto';
+import { Type } from "class-transformer";
+import { ValidateNested } from "class-validator";
+import { UpdateUserDto } from "src/users/dto/update-user.dto";
 
-export class UpdateChefDto extends PartialType(CreateChefDto) {}
+
+export class UpdateChefDto {
+    @ValidateNested()
+    @Type(() => UpdateUserDto)
+    user: UpdateUserDto;
+}

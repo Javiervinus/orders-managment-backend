@@ -11,6 +11,7 @@ export class CreateUserDto {
     @IsEmail()
     email: string;
     rol: string;
+    isAdmin: boolean;
 
 }
 

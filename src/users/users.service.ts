@@ -13,11 +13,16 @@ export class UsersService {
 
   findAll() {
 
-    return this.userModel.findAll({ attributes: { exclude: ["password"] } });
+    return this.userModel.findAll({
+      attributes: {
+        exclude: ["password"],
+      },
+      include: ["waiter", "chef"]
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.userModel.findByPk(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

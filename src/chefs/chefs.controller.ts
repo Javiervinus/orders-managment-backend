@@ -1,12 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Public } from 'src/core/decorators/public.decorator';
 import { ChefsService } from './chefs.service';
 import { CreateChefDto } from './dto/create-chef.dto';
 import { UpdateChefDto } from './dto/update-chef.dto';
 
-@Controller('chefs')
+@Controller()
 export class ChefsController {
-  constructor(private readonly chefsService: ChefsService) {}
+  constructor(private readonly chefsService: ChefsService) { }
 
+  @Public()
   @Post()
   create(@Body() createChefDto: CreateChefDto) {
     return this.chefsService.create(createChefDto);
