@@ -16,14 +16,22 @@ export class WaitersService {
 
 
   async create(createWaiterDto: CreateWaiterDto) {
-    createWaiterDto.user.rol = Roles.WAITER;
-    const mailExist = await this.userService.verifyRepeatedMail(createWaiterDto.user?.email, Roles.WAITER);
-    if (mailExist) {
-      throw new BadRequestException('Ya existe un usuario con este correo');
+    // createWaiterDto.user.rol = Roles.WAITER;
+    let user;
+    if (createWaiterDto.userId) {
+      console.log(createWaiterDto.userId)
+      user = this.userService.findOne(createWaiterDto.userId)
+      return this.waiterModel.create(createWaiterDto as any);
+    } else {
+      const mailExist = await this.userService.verifyRepeatedMail(createWaiterDto.user?.email, Roles.WAITER);
+      if (mailExist) {
+        throw new BadRequestException('Ya existe un usuario con este correo');
+      }
+      return this.waiterModel.create(createWaiterDto as any, {
+        include: ['user']
+      });
     }
-    return this.waiterModel.create(createWaiterDto as any, {
-      include: ['user']
-    });
+
   }
   async login(email: string, password: string) {
     const user = await this.waiterModel.findOne(

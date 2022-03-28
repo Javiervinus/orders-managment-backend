@@ -1,7 +1,9 @@
-import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, Model, Table } from "sequelize-typescript";
+import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, HasOne, Model, Table } from "sequelize-typescript";
 import { hash } from 'bcrypt';
 import { Roles } from "src/core/constants";
 import { Exclude } from "class-transformer";
+import Waiter from "src/waiters/entities/waiter.entity";
+import Chef from "src/chefs/entities/chef.entity";
 
 @Table({ timestamps: true })
 export default class User extends Model {
@@ -18,6 +20,13 @@ export default class User extends Model {
     password: string;
     @Column(DataType.ENUM(Roles.CHEF, Roles.WAITER))
     rol: string;
+
+
+    @HasOne(() => Waiter)
+    waiter: Waiter;
+    @HasOne(() => Chef)
+    chef: Chef;
+
     @BeforeCreate
     @BeforeUpdate
     static async hashPasswordBeforeCreate(user: User) {

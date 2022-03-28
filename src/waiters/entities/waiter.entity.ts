@@ -1,11 +1,12 @@
-import { BelongsTo, Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table, Unique } from "sequelize-typescript";
 import Branch from "src/branch/entities/branch.entity";
 import User from "src/users/entities/user.entity";
-
 @Table({ timestamps: true })
 export default class Waiter extends Model {
     @ForeignKey(() => User)
-    @Column
+    @Column({
+        unique: true
+    })
     userId: number;
     @ForeignKey(() => Branch)
     @Column
