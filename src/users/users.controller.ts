@@ -14,7 +14,7 @@ export class UsersController {
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
-  @RolesAdm(Roles.CHEF)
+  @RolesAdm(Roles.WAITER)
   @Get()
   findAll(@User() user: any) {
     return this.usersService.findAll();

@@ -2,9 +2,8 @@ import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { ChefsModule } from 'src/chefs/chefs.module';
 import { RolesGuard } from 'src/core/guards/roles.guard';
-import { WaitersModule } from 'src/waiters/waiters.module';
+import { UsersModule } from 'src/users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
@@ -14,8 +13,7 @@ import { LocalStrategy } from './local.strategy';
 
 @Module({
   imports: [
-    ChefsModule,
-    WaitersModule,
+    UsersModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

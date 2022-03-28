@@ -10,8 +10,9 @@ export class AuthController {
     constructor(private authService: AuthService) { }
     @UseGuards(LocalAuthGuard)
     @Public()
-    @Post('login/:rol')
+    @Post('login')
     async login(@Request() req) {
+        console.log("que pasaa")
         return this.authService.login(req.user)
     }
 }
