@@ -1,4 +1,4 @@
-import { Column, HasMany, Model, Table } from "sequelize-typescript";
+import { Column, DeletedAt, HasMany, Model, Table } from "sequelize-typescript";
 import Branch from "src/branch/entities/branch.entity";
 
 @Table({ timestamps: true })
@@ -7,7 +7,8 @@ export default class Restaurant extends Model {
     name: string;
     @Column
     logo: string;
-
+    @DeletedAt
+    deleteAt: Date
     @HasMany(() => Branch)
     branches: Branch;
 }

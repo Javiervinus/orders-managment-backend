@@ -15,7 +15,7 @@ export class ChefsService {
   }
   async create(createChefDto: CreateChefDto) {
     createChefDto.user.rol = Roles.CHEF
-    const mailExist = await this.userService.verifyRepeatedMail(createChefDto.user?.email, Roles.CHEF);
+    const mailExist = await this.userService.verifyRepeatedMail(createChefDto.user?.email);
     if (mailExist) {
       throw new BadRequestException('Ya existe un usuario con este correo');
     }

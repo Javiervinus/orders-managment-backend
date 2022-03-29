@@ -23,7 +23,7 @@ export class WaitersService {
       user = this.userService.findOne(createWaiterDto.userId)
       return this.waiterModel.create(createWaiterDto as any);
     } else {
-      const mailExist = await this.userService.verifyRepeatedMail(createWaiterDto.user?.email, Roles.WAITER);
+      const mailExist = await this.userService.verifyRepeatedMail(createWaiterDto.user?.email);
       if (mailExist) {
         throw new BadRequestException('Ya existe un usuario con este correo');
       }

@@ -43,6 +43,10 @@ import { BranchModule } from './branch/branch.module';
           {
             path: "users",
             module: UsersModule
+          },
+          {
+            path: "restaurants",
+            module: RestaurantsModule
           }
         ]
       }

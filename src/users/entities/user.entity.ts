@@ -1,4 +1,4 @@
-import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, HasOne, Model, Table } from "sequelize-typescript";
+import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, DeletedAt, HasOne, Model, Table } from "sequelize-typescript";
 import { hash } from 'bcrypt';
 import { Roles } from "src/core/constants";
 import { Exclude } from "class-transformer";
@@ -20,7 +20,8 @@ export default class User extends Model {
     password: string;
     @Column(DataType.ENUM(Roles.CHEF, Roles.WAITER))
     rol: string;
-
+    @DeletedAt
+    deleteAt: Date
 
     @HasOne(() => Waiter)
     waiter: Waiter;

@@ -2,11 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RestaurantsService } from './restaurants.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { RolesAdm } from 'src/core/decorators/roles.decorator';
+import { Roles } from 'src/core/constants';
 
-@Controller('restaurants')
+@Controller()
 export class RestaurantsController {
-  constructor(private readonly restaurantsService: RestaurantsService) {}
-
+  constructor(private readonly restaurantsService: RestaurantsService) { }
+  @RolesAdm(Roles.ADMIN)
   @Post()
   create(@Body() createRestaurantDto: CreateRestaurantDto) {
     return this.restaurantsService.create(createRestaurantDto);

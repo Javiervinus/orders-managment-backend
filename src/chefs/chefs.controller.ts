@@ -8,7 +8,6 @@ import { UpdateChefDto } from './dto/update-chef.dto';
 export class ChefsController {
   constructor(private readonly chefsService: ChefsService) { }
 
-  @Public()
   @Post()
   create(@Body() createChefDto: CreateChefDto) {
     return this.chefsService.create(createChefDto);

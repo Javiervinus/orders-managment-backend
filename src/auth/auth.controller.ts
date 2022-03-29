@@ -12,7 +12,6 @@ export class AuthController {
     @Public()
     @Post('login')
     async login(@Request() req) {
-        console.log("que pasaa")
         return this.authService.login(req.user)
     }
 }

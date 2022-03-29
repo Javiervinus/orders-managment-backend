@@ -25,7 +25,7 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
       database: process.env.DB_NAME,
       models: [__dirname + '/**/*.entity{.ts,.js}'],
       // autoLoadModels: true,
-      // sync: { alter: true},
+      // sync: { alter: true },
     };
     return config;
   }

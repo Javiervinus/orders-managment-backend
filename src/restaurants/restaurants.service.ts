@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import Restaurant from './entities/restaurant.entity';
 
 @Injectable()
 export class RestaurantsService {
+  constructor(@InjectModel(Restaurant) private restaurantModel: typeof Restaurant) { }
   create(createRestaurantDto: CreateRestaurantDto) {
-    return 'This action adds a new restaurant';
+
+    return this.restaurantModel.create(createRestaurantDto as any);
   }
 
   findAll() {
