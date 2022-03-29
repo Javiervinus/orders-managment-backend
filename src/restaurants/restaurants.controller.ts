@@ -13,7 +13,7 @@ export class RestaurantsController {
   create(@Body() createRestaurantDto: CreateRestaurantDto) {
     return this.restaurantsService.create(createRestaurantDto);
   }
-
+  @RolesAdm(Roles.ADMIN)
   @Get()
   findAll() {
     return this.restaurantsService.findAll();

@@ -9,11 +9,13 @@ export class RestaurantsService {
   constructor(@InjectModel(Restaurant) private restaurantModel: typeof Restaurant) { }
   create(createRestaurantDto: CreateRestaurantDto) {
 
-    return this.restaurantModel.create(createRestaurantDto as any);
+    return this.restaurantModel.create(createRestaurantDto as any, {
+      include: "branches"
+    });
   }
 
   findAll() {
-    return `This action returns all restaurants`;
+    return this.restaurantModel.findAll();
   }
 
   findOne(id: number) {
