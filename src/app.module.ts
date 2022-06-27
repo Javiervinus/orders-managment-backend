@@ -12,6 +12,7 @@ import { RouterModule } from '@nestjs/core';
 import { Roles } from './core/constants';
 import { ConfigModule } from '@nestjs/config';
 import { BranchModule } from './branch/branch.module';
+import { TablesModule } from './tables/tables.module';
 
 @Module({
   imports: [
@@ -47,11 +48,16 @@ import { BranchModule } from './branch/branch.module';
           {
             path: "restaurants",
             module: RestaurantsModule
+          },
+          {
+            path: "tables",
+            module: TablesModule
           }
         ]
       }
     ]),
-    BranchModule
+    BranchModule,
+    TablesModule
   ],
   controllers: [AppController],
   providers: [AppService],

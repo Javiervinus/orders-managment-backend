@@ -13,6 +13,8 @@ export default class Waiter extends Model {
     branchId: number;
     @DeletedAt
     deleteAt: Date
+
+
     @BelongsTo(() => Branch)
     branch: Branch;
     @BelongsTo(() => User)

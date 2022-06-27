@@ -7,11 +7,14 @@ export default class Branch extends Model {
 
     @Column
     name: string;
+
     @Column
     address: string;
+
     @ForeignKey(() => Restaurant)
     @Column
     restaurantId: number;
+
     @DeletedAt
     deleteAt: Date
 
