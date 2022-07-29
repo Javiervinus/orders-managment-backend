@@ -29,7 +29,7 @@ export class TablesController {
   update(@Param('id') id: string, @Body() updateTableDto: UpdateTableDto) {
     return this.tablesService.update(+id, updateTableDto);
   }
-
+  @RolesAdm(Roles.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.tablesService.remove(+id);

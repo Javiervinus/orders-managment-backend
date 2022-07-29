@@ -33,7 +33,9 @@ export class TablesService {
     return `This action updates a #${id} table`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} table`;
+  async remove(id: number) {
+    const response = await this.tableModel.destroy({ where: { id } })
+
+    return response == 1 ? "Mesa eliminada" : "Mesa no eliminada";
   }
 }
