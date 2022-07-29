@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import Branch from 'src/branch/entities/branch.entity';
+import User from 'src/users/entities/user.entity';
 import { CreateTableDto } from './dto/create-table.dto';
 import { UpdateTableDto } from './dto/update-table.dto';
-import Table from './entities/table.entity';
+import Tables from './entities/table.entity';
 
 @Injectable()
 export class TablesService {
-  constructor(@InjectModel(Table) private tableModel: typeof Table) { }
-  create(createTableDto: CreateTableDto) {
-    return this.tableModel.create(createTableDto as any)
+  constructor(@InjectModel(Tables) private tableModel: typeof Tables) { }
+  async create(body: any, user: User) {
+    // this.tableModel.create({ branchId: user.branchId })
+    const branch = await Branch.findByPk(user.branchId, { include: ["tables"] })
+
+    return branch.$create("table", body);
   }
 
   findAll() {

@@ -1,9 +1,10 @@
-import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, Column, DataType, Default, DeletedAt, HasOne, Model, Table } from "sequelize-typescript";
+import { AfterFind, BeforeCreate, BeforeFind, BeforeFindAfterExpandIncludeAll, BeforeUpdate, BelongsTo, Column, DataType, Default, DeletedAt, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { hash } from 'bcrypt';
 import { Roles } from "src/core/constants";
 import { Exclude } from "class-transformer";
 import Waiter from "src/waiters/entities/waiter.entity";
 import Chef from "src/chefs/entities/chef.entity";
+import Branch from "src/branch/entities/branch.entity";
 
 @Table({ timestamps: true })
 export default class User extends Model {
@@ -20,6 +21,9 @@ export default class User extends Model {
     password: string;
     @Column(DataType.ENUM(Roles.CHEF, Roles.WAITER))
     rol: string;
+    @ForeignKey(() => Branch)
+    @Column
+    branchId: number;
     @DeletedAt
     deleteAt: Date
 
@@ -27,7 +31,8 @@ export default class User extends Model {
     waiter: Waiter;
     @HasOne(() => Chef)
     chef: Chef;
-
+    @BelongsTo(() => Branch)
+    branch: Branch;
     @BeforeCreate
     @BeforeUpdate
     static async hashPasswordBeforeCreate(user: User) {

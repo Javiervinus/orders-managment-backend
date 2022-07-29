@@ -9,14 +9,12 @@ export default class Waiter extends Model {
     })
     userId: number;
     @ForeignKey(() => Branch)
-    @Column
-    branchId: number;
+
     @DeletedAt
     deleteAt: Date
 
 
-    @BelongsTo(() => Branch)
-    branch: Branch;
+
     @BelongsTo(() => User)
     user: User;
 

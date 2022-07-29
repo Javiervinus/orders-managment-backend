@@ -4,14 +4,15 @@ import { CreateTableDto } from './dto/create-table.dto';
 import { UpdateTableDto } from './dto/update-table.dto';
 import { RolesAdm } from 'src/core/decorators/roles.decorator';
 import { Roles } from 'src/core/constants';
+import { User } from 'src/core/decorators/user.decorator';
 
 @Controller()
 export class TablesController {
   constructor(private readonly tablesService: TablesService) { }
   @RolesAdm(Roles.ADMIN)
   @Post()
-  create(@Body() createTableDto: CreateTableDto) {
-    return this.tablesService.create(createTableDto);
+  create(@Body() body: any, @User() user) {
+    return this.tablesService.create(body, user);
   }
 
   @Get()

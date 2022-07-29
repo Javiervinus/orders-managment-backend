@@ -15,7 +15,7 @@ export class RestaurantsService {
   }
 
   findAll() {
-    return this.restaurantModel.findAll();
+    return this.restaurantModel.findAll({ include: { association: "branches", include: ["tables"] } });
   }
 
   findOne(id: number) {

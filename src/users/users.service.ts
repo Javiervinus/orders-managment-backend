@@ -16,7 +16,7 @@ export class UsersService {
     }
 
     const user = await this.userModel.create(createUserDto as any, {
-      include: ["waiter", "chef"],
+      include: ["waiter", "chef", "branch"],
     });
     user.$create(createUserDto.rol, null)
     return user;
@@ -25,7 +25,7 @@ export class UsersService {
 
   findAll() {
 
-    return this.userModel.findAll({ attributes: { exclude: ["password"] }, include: ["waiter", "chef"] });
+    return this.userModel.findAll({ attributes: { exclude: ["password"] }, include: ["waiter", "chef", "branch"] });
   }
 
   findOne(id: number) {
@@ -50,7 +50,7 @@ export class UsersService {
         where: {
           email: email
         },
-        include: ["chef", "waiter"]
+        include: ["chef", "waiter", "branch"]
       }
     );
     if (user && (await compare(password, user.password))) {
